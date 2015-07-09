@@ -3,7 +3,7 @@
     "description" : "FullCalendar Yii2 widget",
     "type": "yii2-extension",
     "license": "MIT",
-    "version" : "0.0.5",
+    "version" : "0.0.6",
     "authors": [
         {
             "name": "Dmitrij Sheremetjev",
@@ -14,7 +14,7 @@
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.4",
-        "bower-asset/fullcalendar" : "^2.3"
+        "bower-asset/fullcalendar" : "dev-master"
     },
     "autoload": {
         "psr-4": {
