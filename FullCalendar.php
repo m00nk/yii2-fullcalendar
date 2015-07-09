@@ -18,6 +18,11 @@ class FullCalendar extends Widget
 {
 	public function run()
 	{
+		$view = $this->getView();
+
+		FullCalendarAssets::register($view);
+
+
 		return '<h1>IT IS ME!!!</h1>';
 	}
 }
