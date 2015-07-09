@@ -3,7 +3,7 @@
     "description" : "FullCalendar Yii2 widget",
     "type": "yii2-extension",
     "license": "MIT",
-    "version" : "0.0.7",
+    "version" : "1.0.0",
     "authors": [
         {
             "name": "Dmitrij Sheremetjev",

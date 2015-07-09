@@ -14,19 +14,8 @@ use yii\web\AssetBundle;
 
 class FullCalendarAssets extends AssetBundle
 {
-	public $css = [
-//		'jsk.css',
-	];
-
-	public $js = [
-//		'jsk.js'
-	];
-
 	public $depends = [
-//		'yii\bootstrap\BootstrapAsset',
-//		'yii\web\JqueryAsset',
-//		'yii\jui\JuiAsset',
-//		'm00nk\jsk\SweetAlertAsset'
+		'yii\web\JqueryAsset',
 	];
 
 	public $publishOptions = [
@@ -36,6 +25,16 @@ class FullCalendarAssets extends AssetBundle
 	public function init()
 	{
 		$this->sourcePath = __DIR__.'/assets';
+
+		$this->css = [
+			YII_DEBUG ? 'fullcalendar.min.css' : 'fullcalendar.css'
+		];
+
+		$this->js = [
+			'lib/moment.min.js',
+			YII_DEBUG ? 'fullcalendar.min.js' : 'fullcalendar.js'
+		];
+
 		parent::init();
 	}
 }
