@@ -23,6 +23,9 @@ class FullCalendar extends Widget
 	const VIEW_AGENDA_WEEK = 'agendaWeek';
 	const VIEW_AGENDA_DAY = 'agendaDay';
 
+	//======================================================
+	// Параметры
+	//======================================================
 
 	public $options = [];
 
@@ -32,10 +35,16 @@ class FullCalendar extends Widget
 	/** @var FullCalendarEvent[] массив ивентов для отображения */
 	public $events = [];
 
+	/** @var bool|string URL для скачивания данных о событиях. */
+	public $ajaxUrl = false;
+
+	/** @var array дополнительные параметры AJAX-запросов */
+	public $ajaxData = [];
+
 	/** @var int максимальное количество ивентов в одном дне */
 	public $eventLimit = 5;
 
-	/** @var string дефолтовый вид.  */
+	/** @var string дефолтовый вид. */
 	public $defaultView = self::VIEW_MONTH;
 
 	/** @var array объекты в заголовке. Документация: http://fullcalendar.io/docs/display/header/ */
@@ -45,7 +54,7 @@ class FullCalendar extends Widget
 		'right' => 'today prev,next, month, basicWeek, basicDay, agendaWeek, agendaDay'
 	];
 
-	/** @var string|int Высота "окна" виджета в точках. Этот размер не влияет на размер виджета, если не влезет, он будет скроллиться внутри "окна".  */
+	/** @var string|int Высота "окна" виджета в точках. Этот размер не влияет на размер виджета, если не влезет, он будет скроллиться внутри "окна". */
 	public $height = 'auto';
 
 	/** @var string|int Высота, к которой будет стремиться виджет. В доке сказано, что при невлезании появятся скроллы, у меня не появились... */
@@ -56,7 +65,7 @@ class FullCalendar extends Widget
 	 * Если не задан (FALSE), то будет использован часовой пояс приложения (не пользователя!!!)
 	 * Документация: http://fullcalendar.io/docs/timezone/timezone/
 	 */
-		public $timezone = 'UTC';
+	public $timezone = 'UTC';
 
 	/** @var bool|string формат отображения времени. Документация: http://fullcalendar.io/docs/text/timeFormat/ */
 	public $timeFormat = false;
@@ -80,11 +89,15 @@ class FullCalendar extends Widget
 	 */
 	public $eventClick = false;
 
-	/** @var bool Обработчик начала ховера (вход мыши)  */
+	/** @var bool Обработчик начала ховера (вход мыши) */
 	public $eventMouseover = false;
 
-	/** @var bool Обработчик завершения ховера (выход мыши)  */
+	/** @var bool Обработчик завершения ховера (выход мыши) */
 	public $eventMouseout = false;
+
+	//======================================================
+	//======================================================
+	//======================================================
 
 	public function run()
 	{
@@ -95,7 +108,18 @@ class FullCalendar extends Widget
 		if(!array_key_exists('id', $this->options)) $this->options['id'] = $this->getId();
 
 		//-----------------------------------------
-		if(!array_key_exists('events', $this->jsOptions)) $this->jsOptions['events'] = $this->events;
+		if(!array_key_exists('events', $this->jsOptions))
+		{
+			if($this->ajaxUrl === false)
+				$this->jsOptions['events'] = $this->events;
+			else
+			{
+				$this->jsOptions['events'] = [
+					'url' => $this->ajaxUrl,
+					'data' => $this->ajaxData
+				];
+			}
+		}
 
 		if(!array_key_exists('eventLimit', $this->jsOptions)) $this->jsOptions['eventLimit'] = $this->eventLimit;
 		if(!array_key_exists('defaultView', $this->jsOptions)) $this->jsOptions['defaultView'] = $this->defaultView;
