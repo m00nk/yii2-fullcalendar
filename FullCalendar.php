@@ -13,6 +13,7 @@ use yii\helpers\Html;
 use yii\base\Widget;
 use \Yii;
 use yii\helpers\Json;
+use yii\web\JsExpression;
 
 
 class FullCalendar extends Widget
@@ -103,7 +104,7 @@ class FullCalendar extends Widget
 	{
 		$view = $this->getView();
 
-		FullCalendarAssets::register($view);
+		$bundle = FullCalendarAssets::register($view);
 
 		if(!array_key_exists('id', $this->options)) $this->options['id'] = $this->getId();
 
@@ -140,6 +141,13 @@ class FullCalendar extends Widget
 		if(!array_key_exists('eventClick', $this->jsOptions) && $this->eventClick !== false) $this->jsOptions['eventClick'] = $this->eventClick;
 		if(!array_key_exists('eventMouseover', $this->jsOptions) && $this->eventMouseover !== false) $this->jsOptions['eventMouseover'] = $this->eventMouseover;
 		if(!array_key_exists('eventMouseout', $this->jsOptions) && $this->eventMouseout !== false) $this->jsOptions['eventMouseout'] = $this->eventMouseout;
+
+		$this->jsOptions['loading'] = new JsExpression('function(isLoading, view) {
+			if(isLoading)
+				$("#'.$this->id.'").find("h2").append($("<img style=\"margin: 0 0 6px 10px\" src=\"'.$bundle->baseUrl.'/loading-indicator.gif\" id=fullcalloadimg />"));
+			else
+				$("#'.$this->id.'").find("#fullcalloadimg").remove();
+		}');
 
 		echo Html::tag('div', '', $this->options);
 		$view->registerJs('$("#'.$this->id.'").fullCalendar('.Json::encode($this->jsOptions).');');
