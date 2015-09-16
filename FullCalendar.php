@@ -42,6 +42,9 @@ class FullCalendar extends Widget
 	/** @var array дополнительные параметры AJAX-запросов */
 	public $ajaxData = [];
 
+	/** @var bool|string "начальная" дата. Формат: YYYY-MM-DD. Если указать 2015-11-08, то в режиме месяца будет показан ноябрь 2015, в режиме недели - та неделя, на которую попадает указанная дата.  */
+	public $defaultDate = false;
+
 	/** @var int максимальное количество ивентов в одном дне */
 	public $eventLimit = 5;
 
@@ -136,6 +139,7 @@ class FullCalendar extends Widget
 		if(!array_key_exists('slotEventOverlap', $this->jsOptions)) $this->jsOptions['slotEventOverlap'] = $this->slotEventOverlap;
 
 		if(!array_key_exists('timeFormat', $this->jsOptions) && $this->timeFormat !== false) $this->jsOptions['timeFormat'] = $this->timeFormat;
+		if(!array_key_exists('defaultDate', $this->jsOptions) && $this->defaultDate !== false) $this->jsOptions['defaultDate'] = $this->defaultDate;
 
 		//-----------------------------------------
 		if(!array_key_exists('eventClick', $this->jsOptions) && $this->eventClick !== false) $this->jsOptions['eventClick'] = $this->eventClick;

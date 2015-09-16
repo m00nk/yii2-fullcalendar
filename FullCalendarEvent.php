@@ -24,6 +24,7 @@ class FullCalendarEvent
 	public $allDay = false;
 
 	public $url = '';
+	public $code = '';
 
 	public $className = '';
 
