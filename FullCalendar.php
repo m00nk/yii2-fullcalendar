@@ -81,6 +81,13 @@ class FullCalendar extends Widget
 	public $slotEventOverlap = true;
 
 	//======================================================
+	// Рендерер
+	//======================================================
+
+	/** @var \yii\web\JsExpression|bool кастомный рендерер ивентов. Документация: http://fullcalendar.io/docs/event_rendering/eventRender/  */
+	public $eventRender = false;
+
+	//======================================================
 	// Обработчики событий
 	//======================================================
 
@@ -140,6 +147,9 @@ class FullCalendar extends Widget
 
 		if(!array_key_exists('timeFormat', $this->jsOptions) && $this->timeFormat !== false) $this->jsOptions['timeFormat'] = $this->timeFormat;
 		if(!array_key_exists('defaultDate', $this->jsOptions) && $this->defaultDate !== false) $this->jsOptions['defaultDate'] = $this->defaultDate;
+
+		//-----------------------------------------
+		if(!array_key_exists('eventRender', $this->jsOptions) && $this->eventRender !== false) $this->jsOptions['eventRender'] = $this->eventRender;
 
 		//-----------------------------------------
 		if(!array_key_exists('eventClick', $this->jsOptions) && $this->eventClick !== false) $this->jsOptions['eventClick'] = $this->eventClick;
