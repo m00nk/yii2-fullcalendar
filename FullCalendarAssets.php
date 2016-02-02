@@ -37,15 +37,4 @@ class FullCalendarAssets extends AssetBundle
 
 		parent::init();
 	}
-
-//	public function registerAssetFiles($view)
-//	{
-//		foreach($this->css as &$c)
-//			$c = \Yii::$app->params['widget']['baseUrl'].$this->baseUrl.'/'.$c;
-//
-//		foreach($this->js as &$c)
-//			$c = \Yii::$app->params['widget']['baseUrl'].$this->baseUrl.'/'.$c;
-//
-//		parent::registerAssetFiles($view);
-//	}
 }

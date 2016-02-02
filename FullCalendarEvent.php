@@ -33,7 +33,7 @@ class FullCalendarEvent
 	public $overlap = true;
 
 	public $color = null;
-	public $backgroudColor = null;
+	public $backgroundColor = null;
 	public $borderColor = null;
 	public $textColor = null;
 }
